@@ -1,20 +1,15 @@
 <?php
-
-use App\Http\Controllers\ProfileController;
+ 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PublicController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
+ 
+//  PUBLIC ROUTES 
+Route::get('/', [PublicController::class, 'home'])->name('home');
+Route::get('/courses', [PublicController::class, 'courses'])->name('courses');
+Route::get('/course/{slug}', [PublicController::class, 'courseDetail'])->name('course.detail');
+Route::get('/about', [PublicController::class, 'about'])->name('about');
+Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
+Route::post('/contact', [PublicController::class, 'contactSubmit'])->name('contact.submit');
+Route::get('/verify-certificate/{code}', [PublicController::class, 'verifyCertificate'])->name('certificate.verify');
+ 
