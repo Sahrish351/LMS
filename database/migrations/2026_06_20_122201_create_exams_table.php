@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->foreignId('student_id')->constrained('users')->cascadeOnDelete();
             $table->integer('obtained_marks')->default(0);
             $table->boolean('is_passed')->default(false);
-            $table->string('grade')->nullable();    // A, B, C, F
+            $table->string('grade')->nullable();    
             $table->json('answers')->nullable();
             $table->timestamp('started_at')->nullable();
             $table->timestamp('submitted_at')->nullable();
