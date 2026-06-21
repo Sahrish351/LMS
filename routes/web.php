@@ -11,5 +11,5 @@ Route::get('/course/{slug}', [PublicController::class, 'courseDetail'])->name('c
 Route::get('/about', [PublicController::class, 'about'])->name('about');
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 Route::post('/contact', [PublicController::class, 'contactSubmit'])->name('contact.submit');
-Route::get('/verify-certificate/{code}', [PublicController::class, 'verifyCertificate'])->name('certificate.verify');
+Route::get('/verify-certificate', [PublicController::class, 'verifyCertificate'])->name('certificate.verify');
  
