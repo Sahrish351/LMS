@@ -12,17 +12,13 @@ use App\Models\Referral;
 
 class RegisterController extends Controller
 {
-    // =============================================
-    // Show Register Form
-    // =============================================
+    
     public function showRegistrationForm()
     {
         return view('auth.register');
     }
 
-    // =============================================
-    // Handle Registration
-    // =============================================
+    
     public function register(Request $request)
     {
         $request->validate([
@@ -39,7 +35,7 @@ class RegisterController extends Controller
             'terms.accepted'  => 'You must accept the Terms of Service to continue.',
         ]);
 
-        // Check referral code
+      
         $referredBy = null;
         if ($request->filled('referral_code')) {
             $referrer = User::where('referral_code', strtoupper($request->referral_code))->first();
@@ -48,7 +44,7 @@ class RegisterController extends Controller
             }
         }
 
-        // Create user
+        
         $user = User::create([
             'name'              => $request->name,
             'email'             => $request->email,
@@ -61,7 +57,7 @@ class RegisterController extends Controller
             'email_verified_at' => now(),
         ]);
 
-        // Record referral if applicable
+       
         if ($referredBy) {
             Referral::create([
                 'referrer_id'  => $referredBy,
@@ -71,7 +67,7 @@ class RegisterController extends Controller
             ]);
         }
 
-        // Auto login after registration
+       
         Auth::login($user);
 
         return redirect('/student/dashboard')
