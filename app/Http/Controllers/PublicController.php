@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Course;
 use App\Models\Batch;
 use App\Models\Certificate;
@@ -120,17 +121,51 @@ class PublicController extends Controller
     }
  
     public function contactSubmit(Request $request)
-    {
-        $request->validate([
-            'name'            => 'required|string|max:100',
-            'email'           => 'required|email|max:150',
-            'phone'           => 'nullable|string|max:20',
-            'course_interest' => 'nullable|string|max:50',
-            'message'         => 'required|string|min:10|max:1000',
-        ]);
- 
-        return redirect()->back()->with('contact_success', true);
-    }
+{
+    $validated = $request->validate([
+        'name'    => 'required|string|max:100',
+        'email'   => 'required|email',
+        'phone'   => 'nullable|string',
+        'message' => 'required|string|min:10',
+    ]);
+
+   
+    Mail::send([], [], function ($mail) use ($validated) {
+        $mail->to('sahrish291103@gmail.com')
+             ->subject('New Contact Form: ' . $validated['name'])
+             ->replyTo($validated['email'], $validated['name'])
+             ->html("
+                <h2>New Contact Form Submission</h2>
+                <p><strong>Name:</strong> {$validated['name']}</p>
+                <p><strong>Email:</strong> {$validated['email']}</p>
+                <p><strong>Phone:</strong> {$validated['phone']}</p>
+                <p><strong>Message:</strong> {$validated['message']}</p>
+                <hr>
+                <p><strong>📩 To reply:</strong> Click Reply and your response will go to {$validated['email']}</p>
+             ");
+    });
+
+   
+    Mail::send([], [], function ($mail) use ($validated) {
+        $mail->to($validated['email'], $validated['name'])
+             ->subject('Thank you for contacting Aura Academy! 🙏')
+             ->html("
+                <h2>Thank You for Contacting Us! 🙏</h2>
+                <p>Dear {$validated['name']},</p>
+                <p>Thank you for reaching out to Aura Academy. We have received your message and will get back to you within 24 hours.</p>
+                <p><strong>Your Message:</strong></p>
+                <p style='background:#f5f3ff;padding:15px;border-radius:8px;'>{$validated['message']}</p>
+                <p>In the meantime, feel free to explore our courses at <a href='{{ url('/') }}'>Aura Academy</a></p>
+                <br>
+                <p>Best regards,</p>
+                <p><strong>Aura Academy Team</strong></p>
+                <hr>
+                <p style='color:#9ca3af;font-size:12px;'>This is an automated confirmation. Please do not reply to this email.</p>
+             ");
+    });
+
+    return redirect()->back()->with('contact_success', true);
+}
  
     public function verifyCertificate(Request $request)
     {

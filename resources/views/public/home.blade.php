@@ -834,18 +834,18 @@
         <p style="font-size:15px;color:#6b7280;line-height:1.75;margin:0 0 36px;">Have questions about courses or need guidance? Our team is ready to help you find the right path for your career goals.</p>
 
         <div style="display:flex;flex-direction:column;gap:14px;">
-          <a href="https://wa.me/923000000000" target="_blank" style="display:flex;align-items:center;gap:16px;padding:18px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:18px;text-decoration:none;transition:all .2s;" onmouseenter="this.style.borderColor='#4ade80';" onmouseleave="this.style.borderColor='#bbf7d0';">
+          <a href="https://wa.me/923096545239" target="_blank" style="display:flex;align-items:center;gap:16px;padding:18px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:18px;text-decoration:none;transition:all .2s;" onmouseenter="this.style.borderColor='#4ade80';" onmouseleave="this.style.borderColor='#bbf7d0';">
             <div style="width:46px;height:46px;background:#22c55e;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(34,197,94,.3);">
               <i class="fa-brands fa-whatsapp" style="color:#fff;font-size:22px;"></i>
             </div>
             <div>
               <p style="font-size:11px;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:.06em;margin:0 0 2px;">WhatsApp Support</p>
-              <p style="font-size:15px;font-weight:800;color:#0f0f0f;margin:0;">+92-300-0000000</p>
+              <p style="font-size:15px;font-weight:800;color:#0f0f0f;margin:0;">+92-309-6545239</p>
             </div>
             <i class="fa-solid fa-arrow-right" style="color:#22c55e;margin-left:auto;font-size:14px;"></i>
           </a>
 
-          @foreach([['fa-regular fa-envelope','#7c3aed','Email Us','info@auraacademy.com'],['fa-solid fa-location-dot','#7c3aed','Office','Lahore, Punjab, Pakistan'],['fa-regular fa-clock','#7c3aed','Support Hours','Mon–Sat, 9 AM – 8 PM']] as $info)
+          @foreach([['fa-regular fa-envelope','#7c3aed','Email Us','sahrish291103@gmail.com'],['fa-solid fa-location-dot','#7c3aed','Office','Sheikhpura, Punjab, Pakistan'],['fa-regular fa-clock','#7c3aed','Support Hours','Mon–Sat, 9 AM – 8 PM']] as $info)
           <div style="display:flex;align-items:center;gap:16px;padding:16px 18px;background:#fff;border:1.5px solid #f3f4f6;border-radius:18px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
             <div style="width:46px;height:46px;background:#ede9fe;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
               <i class="{{ $info[0] }}" style="color:{{ $info[1] }};font-size:18px;"></i>

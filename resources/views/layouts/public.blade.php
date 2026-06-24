@@ -147,12 +147,12 @@
  
 <body class="bg-mesh text-slate-800">
  
-{{-- ===== STICKY NAVBAR ===== --}}
+
 <nav class="sticky top-0 z-50 glass border-b border-indigo-50/50" id="main-nav">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
  
-            {{-- Logo --}}
+           
             <a href="{{ url('/') }}" class="flex-shrink-0 flex items-center gap-2.5 group">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-200 group-hover:scale-105 transition-transform">
                     <i class="fa-solid fa-graduation-cap text-base"></i>
@@ -162,7 +162,7 @@
                 </span>
             </a>
  
-            {{-- Desktop Nav --}}
+           
             <div class="hidden md:flex items-center space-x-7 text-sm font-semibold">
                 <a href="{{ url('/') }}"        class="nav-link {{ request()->is('/') ? 'active text-indigo-600' : 'text-slate-600' }} hover:text-indigo-600 transition-colors">Home</a>
                 <a href="{{ url('/courses') }}" class="nav-link {{ request()->is('courses*') ? 'active text-indigo-600' : 'text-slate-600' }} hover:text-indigo-600 transition-colors">Courses</a>
@@ -172,7 +172,7 @@
                 <a href="{{ url('/contact') }}" class="nav-link {{ request()->is('contact*') ? 'active text-indigo-600' : 'text-slate-600' }} hover:text-indigo-600 transition-colors">Contact</a>
             </div>
  
-            {{-- Auth Buttons --}}
+            
             <div class="hidden sm:flex items-center gap-3">
                 @auth
                     @if(auth()->user()->role->name === 'student')
@@ -196,14 +196,14 @@
                 @endauth
             </div>
  
-            {{-- Mobile Toggle --}}
+           
             <button id="nav-toggle" class="md:hidden p-2 text-slate-600 hover:text-indigo-600 transition" aria-label="Open menu">
                 <i class="fa-solid fa-bars text-xl" id="nav-icon"></i>
             </button>
         </div>
     </div>
  
-    {{-- Mobile Drawer --}}
+    
     <div id="mobile-nav" class="hidden md:hidden glass border-t border-indigo-50 px-4 pt-3 pb-6 space-y-2">
         <a href="{{ url('/') }}"        class="block py-2.5 px-3 rounded-xl text-sm font-semibold text-slate-900 hover:bg-indigo-50 hover:text-indigo-600 transition">Home</a>
         <a href="{{ url('/courses') }}" class="block py-2.5 px-3 rounded-xl text-sm font-semibold text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition">Courses</a>
@@ -228,17 +228,16 @@
     </div>
 </nav>
  
-{{-- ===== MAIN CONTENT ===== --}}
+
 <main>
     @yield('content')
 </main>
  
-{{-- ===== FOOTER ===== --}}
+
 <footer class="bg-slate-950 text-slate-400 pt-16 pb-8 border-t border-slate-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-12 gap-8 mb-12">
  
-            {{-- Brand --}}
             <div class="col-span-2 md:col-span-4 space-y-5">
                 <div class="flex items-center gap-2.5">
                     <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white">
@@ -257,7 +256,6 @@
                 </div>
             </div>
  
-            {{-- Courses --}}
             <div class="col-span-1 md:col-span-2 space-y-4">
                 <h4 class="font-bold text-white text-xs uppercase tracking-widest">Courses</h4>
                 <ul class="space-y-2.5 text-sm">
@@ -268,7 +266,7 @@
                 </ul>
             </div>
  
-            {{-- Resources --}}
+           
             <div class="col-span-1 md:col-span-2 space-y-4">
                 <h4 class="font-bold text-white text-xs uppercase tracking-widest">Resources</h4>
                 <ul class="space-y-2.5 text-sm">
@@ -279,7 +277,7 @@
                 </ul>
             </div>
  
-            {{-- Contact --}}
+           
             <div class="col-span-2 md:col-span-4 space-y-4">
                 <h4 class="font-bold text-white text-xs uppercase tracking-widest">Contact</h4>
                 <div class="space-y-3 text-sm">
@@ -287,25 +285,24 @@
                         <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 shrink-0">
                             <i class="fa-brands fa-whatsapp text-sm"></i>
                         </div>
-                        <span>+92-300-0000000</span>
+                        <span>+92-309-6545239</span>
                     </div>
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 shrink-0">
                             <i class="fa-regular fa-envelope text-sm"></i>
                         </div>
-                        <span>info@auraacademy.com</span>
+                        <span>sahrish291103@gmail.com</span>
                     </div>
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 shrink-0">
                             <i class="fa-solid fa-location-dot text-sm"></i>
                         </div>
-                        <span>Lahore, Pakistan</span>
+                        <span>Sheikhpura, Pakistan</span>
                     </div>
                 </div>
             </div>
         </div>
  
-        {{-- Bottom Strip --}}
         <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
             <p>&copy; {{ date('Y') }} AuraAcademy International. All rights reserved.</p>
             <div class="flex gap-5">
@@ -317,7 +314,7 @@
 </footer>
  
 <script>
-    // Mobile Nav Toggle
+  
     const navToggle = document.getElementById('nav-toggle');
     const mobileNav = document.getElementById('mobile-nav');
     const navIcon   = document.getElementById('nav-icon');
@@ -336,7 +333,7 @@
         });
     });
  
-    // Navbar scroll shadow
+    
     window.addEventListener('scroll', () => {
         const nav = document.getElementById('main-nav');
         nav.style.boxShadow = window.scrollY > 10
@@ -344,7 +341,7 @@
             : 'none';
     });
  
-    // FAQ Accordion
+    
     function toggleFaq(btn) {
         const content = btn.nextElementSibling;
         const icon    = btn.querySelector('.faq-icon');
