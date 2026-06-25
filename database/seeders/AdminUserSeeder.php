@@ -12,7 +12,7 @@ class AdminUserSeeder extends Seeder
    
     public function run(): void
     {
-        
+       
         $adminRoleId = DB::table('roles')->where('name', 'admin')->value('id');
 
         if (! $adminRoleId) {

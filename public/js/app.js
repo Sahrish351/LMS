@@ -1,7 +1,31 @@
-
+// ===== SIDEBAR TOGGLE =====
+// Desktop (>=992px): toggles icon-only "collapsed" mode, pushing main content.
+// Mobile (<992px): toggles "open" overlay mode (sidebar slides in/out over content).
 function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
+  const sidebar = document.getElementById('sidebar');
+  if (window.innerWidth < 992) {
+    sidebar.classList.toggle('open');
+  } else {
+    sidebar.classList.toggle('collapsed');
+    // Remember preference across page loads
+    try {
+      localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed') ? '1' : '0');
+    } catch (e) { /* localStorage unavailable, ignore */ }
+  }
 }
+
+// Restore collapsed preference on page load (desktop only)
+document.addEventListener('DOMContentLoaded', function () {
+  const sidebar = document.getElementById('sidebar');
+  if (!sidebar) return;
+  if (window.innerWidth >= 992) {
+    try {
+      if (localStorage.getItem('sidebarCollapsed') === '1') {
+        sidebar.classList.add('collapsed');
+      }
+    } catch (e) { /* ignore */ }
+  }
+});
 
 document.addEventListener('click', function (e) {
   const sidebar = document.getElementById('sidebar');
@@ -13,14 +37,14 @@ document.addEventListener('click', function (e) {
   }
 });
 
-
+// ===== PERIOD TAB SWITCH =====
 function switchPeriod(btn, period, callback) {
   btn.closest('.period-tabs').querySelectorAll('.period-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   if (typeof callback === 'function') callback(period);
 }
 
-
+// ===== CSRF SETUP FOR AJAX =====
 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
 function postJSON(url, data = {}) {
@@ -35,14 +59,14 @@ function postJSON(url, data = {}) {
   }).then(res => res.json());
 }
 
-
+// ===== DELETE CONFIRMATION =====
 function confirmDelete(formId, message = 'Are you sure you want to delete this item?') {
   if (confirm(message)) {
     document.getElementById(formId).submit();
   }
 }
 
-
+// ===== TOAST NOTIFICATION =====
 function showToast(message, type = 'success') {
   const toastEl = document.createElement('div');
   toastEl.className = `toast-msg toast-${type}`;
@@ -57,7 +81,7 @@ function showToast(message, type = 'success') {
   setTimeout(() => toastEl.remove(), 3000);
 }
 
-
+// ===== TABLE SEARCH FILTER =====
 function filterTable(inputEl, tableId) {
   const filter = inputEl.value.toLowerCase();
   const rows = document.querySelectorAll(`#${tableId} tbody tr`);
@@ -66,6 +90,7 @@ function filterTable(inputEl, tableId) {
   });
 }
 
+// ===== AUTO-DISMISS ALERTS =====
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.alert-dismissible').forEach(alert => {
     setTimeout(() => {
