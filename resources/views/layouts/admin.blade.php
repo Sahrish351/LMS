@@ -85,24 +85,73 @@
       <span class="nav-label">Lessons</span>
     </a>
 
-    <!-- OPERATIONS -->
+    <!-- ===== OPERATIONS - COMPLETE WITH ALL 8 MODULES ===== -->
     <div class="nav-section-label">Operations</div>
 
-    <a class="nav-link-item {{ request()->routeIs('admin.batches*') || request()->routeIs('admin.certificates*') ? '' : 'collapsed' }}"
+    <a class="nav-link-item {{ request()->routeIs('admin.batches*') || request()->routeIs('admin.enrollments*') || request()->routeIs('admin.exams*') || request()->routeIs('admin.assignments*') || request()->routeIs('admin.quizzes*') || request()->routeIs('admin.live-classes*') || request()->routeIs('admin.attendance*') || request()->routeIs('admin.certificates*') ? '' : 'collapsed' }}"
        data-bs-toggle="collapse" data-bs-target="#menuOperations" style="cursor:pointer;">
       <span class="nav-icon"><i class="fas fa-cogs"></i></span>
       <span class="nav-label">Operations</span>
       <i class="fas fa-chevron-down nav-chevron"></i>
     </a>
-    <div class="collapse submenu {{ request()->routeIs('admin.batches*') || request()->routeIs('admin.certificates*') ? 'show' : '' }}" id="menuOperations">
+    <div class="collapse submenu {{ request()->routeIs('admin.batches*') || request()->routeIs('admin.enrollments*') || request()->routeIs('admin.exams*') || request()->routeIs('admin.assignments*') || request()->routeIs('admin.quizzes*') || request()->routeIs('admin.live-classes*') || request()->routeIs('admin.attendance*') || request()->routeIs('admin.certificates*') ? 'show' : '' }}" id="menuOperations">
+      
+      <!-- 1. Batch Management -->
       <a class="nav-link-item {{ request()->routeIs('admin.batches.index') ? 'active' : '' }}"
          href="{{ route('admin.batches.index') }}">
+        <span class="nav-icon"><i class="fas fa-layer-group"></i></span>
         <span class="nav-label">Batches</span>
       </a>
+
+      <!-- 2. Enrollment Management -->
+      <a class="nav-link-item {{ request()->routeIs('admin.enrollments.index') ? 'active' : '' }}"
+         href="{{ route('admin.enrollments.index') }}">
+        <span class="nav-icon"><i class="fas fa-user-plus"></i></span>
+        <span class="nav-label">Enrollments</span>
+      </a>
+
+      <!-- 3. Exam Management -->
+      <a class="nav-link-item {{ request()->routeIs('admin.exams.index') ? 'active' : '' }}"
+         href="{{ route('admin.exams.index') }}">
+        <span class="nav-icon"><i class="fas fa-file-signature"></i></span>
+        <span class="nav-label">Exams</span>
+      </a>
+
+      <!-- 4. Assignment Management -->
+      <a class="nav-link-item {{ request()->routeIs('admin.assignments.index') ? 'active' : '' }}"
+         href="{{ route('admin.assignments.index') }}">
+        <span class="nav-icon"><i class="fas fa-tasks"></i></span>
+        <span class="nav-label">Assignments</span>
+      </a>
+
+      <!-- 5. Quiz Management -->
+      <a class="nav-link-item {{ request()->routeIs('admin.quizzes.index') ? 'active' : '' }}"
+         href="{{ route('admin.quizzes.index') }}">
+        <span class="nav-icon"><i class="fas fa-question-circle"></i></span>
+        <span class="nav-label">Quizzes</span>
+      </a>
+
+      <!-- 6. Live Classes -->
+      <a class="nav-link-item {{ request()->routeIs('admin.live-classes.index') ? 'active' : '' }}"
+         href="{{ route('admin.live-classes.index') }}">
+        <span class="nav-icon"><i class="fas fa-video"></i></span>
+        <span class="nav-label">Live Classes</span>
+      </a>
+
+      <!-- 7. Attendance -->
+      <a class="nav-link-item {{ request()->routeIs('admin.attendance.index') ? 'active' : '' }}"
+         href="{{ route('admin.attendance.index') }}">
+        <span class="nav-icon"><i class="fas fa-user-check"></i></span>
+        <span class="nav-label">Attendance</span>
+      </a>
+
+      <!-- 8. Certificates -->
       <a class="nav-link-item {{ request()->routeIs('admin.certificates.index') ? 'active' : '' }}"
          href="{{ route('admin.certificates.index') }}">
+        <span class="nav-icon"><i class="fas fa-certificate"></i></span>
         <span class="nav-label">Certificates</span>
       </a>
+
     </div>
 
     <!-- FINANCE -->
@@ -165,14 +214,17 @@
     <div class="collapse submenu {{ request()->routeIs('admin.admin-users*') || request()->routeIs('admin.roles*') || request()->routeIs('admin.settings*') ? 'show' : '' }}" id="menuAdmin">
       <a class="nav-link-item {{ request()->routeIs('admin.admin-users.index') ? 'active' : '' }}"
          href="{{ route('admin.admin-users.index') }}">
+        <span class="nav-icon"><i class="fas fa-user-cog"></i></span>
         <span class="nav-label">Admin Users</span>
       </a>
       <a class="nav-link-item {{ request()->routeIs('admin.roles.index') ? 'active' : '' }}"
          href="{{ route('admin.roles.index') }}">
+        <span class="nav-icon"><i class="fas fa-key"></i></span>
         <span class="nav-label">Roles & Permissions</span>
       </a>
       <a class="nav-link-item {{ request()->routeIs('admin.settings.index') ? 'active' : '' }}"
          href="{{ route('admin.settings.index') }}">
+        <span class="nav-icon"><i class="fas fa-cog"></i></span>
         <span class="nav-label">Settings</span>
       </a>
     </div>

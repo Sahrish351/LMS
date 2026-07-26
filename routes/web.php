@@ -1,5 +1,5 @@
 <?php
- 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 
@@ -27,8 +27,15 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 
+// ===== NEW CONTROLLERS ADD KAREIN =====
+use App\Http\Controllers\Admin\EnrollmentController;
+use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Admin\AssignmentController;
+use App\Http\Controllers\Admin\QuizController;
+use App\Http\Controllers\Admin\LiveClassController;
+use App\Http\Controllers\Admin\AttendanceController;
 
- 
+
 //  PUBLIC ROUTES 
 Route::get('/', [PublicController::class, 'home'])->name('home');
 Route::get('/courses', [PublicController::class, 'courses'])->name('courses');
@@ -58,14 +65,12 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 
 
 // Guest Routes
-
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
 });
  
 // admin
-
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
 
     // Dashboard
@@ -130,13 +135,75 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::delete('/lessons/{lesson}', [LessonController::class, 'destroy'])->name('lessons.destroy');
 
     // Batches
-    Route::get('/batches', [BatchController::class, 'index'])->name('batches.index');
-    Route::post('/batches', [BatchController::class, 'store'])->name('batches.store');
-    Route::put('/batches/{batch}', [BatchController::class, 'update'])->name('batches.update');
-    Route::delete('/batches/{batch}', [BatchController::class, 'destroy'])->name('batches.destroy');
+Route::get('/batches', [BatchController::class, 'index'])->name('batches.index');
+Route::get('/batches/create', [BatchController::class, 'create'])->name('batches.create');
+Route::post('/batches', [BatchController::class, 'store'])->name('batches.store');
+Route::get('/batches/{batch}', [BatchController::class, 'show'])->name('batches.show');
+Route::get('/batches/{batch}/edit', [BatchController::class, 'edit'])->name('batches.edit');
+Route::put('/batches/{batch}', [BatchController::class, 'update'])->name('batches.update');
+Route::delete('/batches/{batch}', [BatchController::class, 'destroy'])->name('batches.destroy');
+
+     // Enrollments
+    Route::get('/enrollments', [EnrollmentController::class, 'index'])->name('enrollments.index');
+    Route::get('/enrollments/create', [EnrollmentController::class, 'create'])->name('enrollments.create');
+    Route::post('/enrollments', [EnrollmentController::class, 'store'])->name('enrollments.store');
+    Route::get('/enrollments/{enrollment}', [EnrollmentController::class, 'show'])->name('enrollments.show');
+    Route::get('/enrollments/{enrollment}/edit', [EnrollmentController::class, 'edit'])->name('enrollments.edit');
+    Route::put('/enrollments/{enrollment}', [EnrollmentController::class, 'update'])->name('enrollments.update');
+    Route::delete('/enrollments/{enrollment}', [EnrollmentController::class, 'destroy'])->name('enrollments.destroy');
+
+   // Exams
+    Route::get('/exams', [ExamController::class, 'index'])->name('exams.index');
+    Route::get('/exams/create', [ExamController::class, 'create'])->name('exams.create');
+    Route::post('/exams', [ExamController::class, 'store'])->name('exams.store');
+    Route::get('/exams/{exam}', [ExamController::class, 'show'])->name('exams.show');
+    Route::get('/exams/{exam}/edit', [ExamController::class, 'edit'])->name('exams.edit');
+    Route::put('/exams/{exam}', [ExamController::class, 'update'])->name('exams.update');
+    Route::delete('/exams/{exam}', [ExamController::class, 'destroy'])->name('exams.destroy');
+
+    // ===== ASSIGNMENTS - NAYA ADD =====
+    Route::get('/assignments', [AssignmentController::class, 'index'])->name('assignments.index');
+    Route::get('/assignments/create', [AssignmentController::class, 'create'])->name('assignments.create');
+    Route::post('/assignments', [AssignmentController::class, 'store'])->name('assignments.store');
+    Route::get('/assignments/{assignment}', [AssignmentController::class, 'show'])->name('assignments.show');
+    Route::get('/assignments/{assignment}/edit', [AssignmentController::class, 'edit'])->name('assignments.edit');
+    Route::put('/assignments/{assignment}', [AssignmentController::class, 'update'])->name('assignments.update');
+    Route::delete('/assignments/{assignment}', [AssignmentController::class, 'destroy'])->name('assignments.destroy');
+
+    // ===== QUIZZES - NAYA ADD =====
+    Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
+    Route::get('/quizzes/create', [QuizController::class, 'create'])->name('quizzes.create');
+    Route::post('/quizzes', [QuizController::class, 'store'])->name('quizzes.store');
+    Route::get('/quizzes/{quiz}', [QuizController::class, 'show'])->name('quizzes.show');
+    Route::get('/quizzes/{quiz}/edit', [QuizController::class, 'edit'])->name('quizzes.edit');
+    Route::put('/quizzes/{quiz}', [QuizController::class, 'update'])->name('quizzes.update');
+    Route::delete('/quizzes/{quiz}', [QuizController::class, 'destroy'])->name('quizzes.destroy');
+
+    // ===== LIVE CLASSES - NAYA ADD =====
+    Route::get('/live-classes', [LiveClassController::class, 'index'])->name('live-classes.index');
+    Route::get('/live-classes/create', [LiveClassController::class, 'create'])->name('live-classes.create');
+    Route::post('/live-classes', [LiveClassController::class, 'store'])->name('live-classes.store');
+    Route::get('/live-classes/{class}', [LiveClassController::class, 'show'])->name('live-classes.show');
+    Route::get('/live-classes/{class}/edit', [LiveClassController::class, 'edit'])->name('live-classes.edit');
+    Route::put('/live-classes/{class}', [LiveClassController::class, 'update'])->name('live-classes.update');
+    Route::delete('/live-classes/{class}', [LiveClassController::class, 'destroy'])->name('live-classes.destroy');
+
+    // ===== ATTENDANCE - NAYA ADD =====
+    Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+    Route::get('/attendance/create', [AttendanceController::class, 'create'])->name('attendance.create');
+    Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
+    Route::get('/attendance/{record}', [AttendanceController::class, 'show'])->name('attendance.show');
+    Route::get('/attendance/{record}/edit', [AttendanceController::class, 'edit'])->name('attendance.edit');
+    Route::put('/attendance/{record}', [AttendanceController::class, 'update'])->name('attendance.update');
 
     // Certificates
     Route::get('/certificates', [CertificateController::class, 'index'])->name('certificates.index');
+    Route::get('/certificates/create', [CertificateController::class, 'create'])->name('certificates.create');
+    Route::post('/certificates', [CertificateController::class, 'store'])->name('certificates.store');
+    Route::get('/certificates/{certificate}', [CertificateController::class, 'show'])->name('certificates.show');
+    Route::get('/certificates/{certificate}/edit', [CertificateController::class, 'edit'])->name('certificates.edit');
+    Route::put('/certificates/{certificate}', [CertificateController::class, 'update'])->name('certificates.update');
+    Route::delete('/certificates/{certificate}', [CertificateController::class, 'destroy'])->name('certificates.destroy');
     Route::post('/certificates/{certificate}/issue', [CertificateController::class, 'issue'])->name('certificates.issue');
 
     // Payments
@@ -150,7 +217,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     // Announcements
     Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
+    Route::get('/announcements/create', [AnnouncementController::class, 'create'])->name('announcements.create');
     Route::post('/announcements', [AnnouncementController::class, 'store'])->name('announcements.store');
+    Route::get('/announcements/{announcement}/edit', [AnnouncementController::class, 'edit'])->name('announcements.edit');
+    Route::put('/announcements/{announcement}', [AnnouncementController::class, 'update'])->name('announcements.update');
     Route::delete('/announcements/{announcement}', [AnnouncementController::class, 'destroy'])->name('announcements.destroy');
 
     // Support Tickets
@@ -161,7 +231,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     // Discussion Forum
     Route::get('/discussion-forum', [DiscussionForumController::class, 'index'])->name('discussion-forum.index');
+    Route::get('/discussion-forum/create', [DiscussionForumController::class, 'create'])->name('discussion-forum.create');
+    Route::post('/discussion-forum', [DiscussionForumController::class, 'store'])->name('discussion-forum.store');
     Route::get('/discussion-forum/{thread}', [DiscussionForumController::class, 'show'])->name('discussion-forum.show');
+    Route::get('/discussion-forum/{thread}/edit', [DiscussionForumController::class, 'edit'])->name('discussion-forum.edit');
+    Route::put('/discussion-forum/{thread}', [DiscussionForumController::class, 'update'])->name('discussion-forum.update');
     Route::delete('/discussion-forum/{thread}', [DiscussionForumController::class, 'destroy'])->name('discussion-forum.destroy');
 
     // Notifications
@@ -171,13 +245,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     // Administration
     Route::get('/admin-users', [AdminUserController::class, 'index'])->name('admin-users.index');
+    Route::get('/admin-users/create', [AdminUserController::class, 'create'])->name('admin-users.create');
     Route::post('/admin-users', [AdminUserController::class, 'store'])->name('admin-users.store');
+    Route::get('/admin-users/{user}/edit', [AdminUserController::class, 'edit'])->name('admin-users.edit');
     Route::put('/admin-users/{user}', [AdminUserController::class, 'update'])->name('admin-users.update');
     Route::delete('/admin-users/{user}', [AdminUserController::class, 'destroy'])->name('admin-users.destroy');
 
     Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
     Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');
     Route::put('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
+    Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
